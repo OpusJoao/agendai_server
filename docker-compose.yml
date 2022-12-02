@@ -1,0 +1,30 @@
+version: '3'
+services:
+  agendai-server:
+    container_name: agendai-server
+    restart: always
+    build: .
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    depends_on:
+      - postgres_agendai
+    command: sh -c "yarn dev"
+    links:
+      - postgres_agendai
+    volumes:
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  postgres_agendai:
+    container_name: postgres_agendai
+    restart: always
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: agendai
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
