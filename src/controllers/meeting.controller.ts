@@ -5,10 +5,12 @@ import MeetingService from "../services/meeting.service";
 export default class meetingController{
     private meetingService = new MeetingService()
     async find(request: Request, response: Response){
-        const { userId } = request.query
+        const { userId, code } = request.query
         let meetings
         if(userId){
             meetings = await this.meetingService.findMeetingsByUserId(userId)
+        }else if(code){
+            meetings = await this.meetingService.findByCode(code)
         }
         else{
             meetings = await this.meetingService.findAll()

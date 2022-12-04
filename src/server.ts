@@ -1,5 +1,6 @@
 import express, {Express, Request, Response } from 'express'
 import Routes from './routes';
+import cors from 'cors'
 
 export default class Server{
     private app: Express
@@ -14,6 +15,7 @@ export default class Server{
         this.PORT = process.env.PORT || 3000 
         this.app = express();
         this.app.use(express.json());
+        this.app.use(cors())
     }
 
     routes(): void{

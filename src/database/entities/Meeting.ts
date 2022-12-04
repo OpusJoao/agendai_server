@@ -17,6 +17,12 @@ export class MeetingEntity{
         type: 'text',
         nullable: false
     })
+    code: string
+
+    @Column({
+        type: 'text',
+        nullable: false
+    })
     day: string
 
     @Column({
